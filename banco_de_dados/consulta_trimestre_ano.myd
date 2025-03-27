@@ -1,0 +1,34 @@
+-- Criando uma tabela temporária para importar os dados do CSV
+CREATE TEMPORARY TABLE IF NOT EXISTS demonstracoes_temp (
+    DATA DATE,
+    REG_ANS VARCHAR(20),
+    CD_CONTA VARCHAR(20),
+    DESCRICAO TEXT,
+    VL_SALDO DECIMAL(15,2),
+    VL_SALDO_FINAL DECIMAL(15,2),
+    Ano INT,
+    Trimestre INT
+);
+
+-- Carregando dados do CSV para a tabela temporária
+LOAD DATA INFILE 'C:\\ADS Desenvolve\\Teste Seleção\\caredemo\\banco_de_dados\\demonstracoes_contabeis.csv'
+INTO TABLE demonstracoes_temp
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+-- Query principal para encontrar os 10 maiores valores de 2024
+SELECT 
+    d.REG_ANS,
+    SUM(d.VL_SALDO_FINAL) as TOTAL_SINISTROS,
+    GROUP_CONCAT(DISTINCT DATE_FORMAT(d.DATA, '%m/%Y') ORDER BY d.DATA) as MESES_ANALISADOS
+FROM demonstracoes_temp d
+WHERE 
+    -- Filtro para todo o ano de 2024
+    YEAR(d.DATA) = 2024
+    -- Filtro para "EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR"
+    AND d.DESCRICAO LIKE '%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%'
+GROUP BY d.REG_ANS
+ORDER BY TOTAL_SINISTROS DESC
+LIMIT 10;
