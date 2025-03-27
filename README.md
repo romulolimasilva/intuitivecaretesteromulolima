@@ -1,48 +1,81 @@
-# Dashboard ANS
+# Dashboard ANS - Análise de Sinistros
 
-Dashboard para visualização de dados de sinistros das operadoras de saúde.
+## Sobre o Projeto
+Este projeto é um dashboard para análise de sinistros de operadoras de saúde, desenvolvido principalmente com Python no backend e Vue.js no frontend. Como desenvolvedor com experiência em Python, o foco principal foi criar uma API robusta e eficiente para processamento dos dados.
 
-## Estrutura do Projeto
+## Principais Funcionalidades
+- **Processamento de Dados** (Python/Pandas):
+  - Análise de dados de sinistros por operadora
+  - Cálculos automáticos de totais por período
+  - Filtragem dos top 10 maiores valores
 
-```
-caredemo/
-├── banco_de_dados/     # Scripts de processamento de dados
-├── dash/              # Frontend Vue.js e API Flask
-│   ├── src/          # Código fonte Vue.js
-│   └── api.py        # API Flask
-```
+- **API REST** (Python/Flask):
+  - Endpoints para consulta de dados anuais e trimestrais
+  - Formatação automática de valores monetários
+  - CORS habilitado para integração com frontend
 
-## Tecnologias Utilizadas
+- **Frontend** (Vue.js):
+  - Dashboard interativo (implementado com auxílio da documentação Vue.js)
+  - Visualização em cards e tabelas
+  - Design responsivo com Tailwind CSS
 
-- Backend:
-  - Python 3.x
-  - Flask
-  - Pandas
+## Stack Técnica
+### Backend (Experiência Principal)
+- Python 3.x
+- Flask (Framework Web)
+- Pandas (Análise de Dados)
+- CSV para armazenamento
 
-- Frontend:
-  - Vue.js 3
-  - Tailwind CSS
+### Frontend (Aprendizado Durante o Projeto)
+- Vue.js 3
+- Tailwind CSS
+- Componentes reativos
 
 ## Como Executar
 
-1. Backend (API Flask):
+### Backend (Python/Flask)
 ```bash
+# Instalar dependências Python
+pip install -r requirements.txt
+
+# Executar a API Flask
 cd dash
 python api.py
 ```
 
-2. Frontend (Vue.js):
+### Frontend (Vue.js)
 ```bash
+# Instalar dependências do Node.js
 cd dash
 npm install
+
+# Iniciar servidor de desenvolvimento
 npm run serve
 ```
 
-O frontend estará disponível em `http://localhost:8085` e a API em `http://localhost:5000`.
+## Estrutura do Projeto
+```
+caredemo/
+├── banco_de_dados/     # Scripts Python para processamento
+│   ├── executar_consulta_ano.py
+│   └── executar_consulta_trimestre.py
+├── dash/
+│   ├── api.py          # API Flask
+│   └── src/            # Frontend Vue.js
+└── README.md
+```
 
-## Funcionalidades
+## Aprendizados
+- Forte utilização de Pandas para manipulação de dados
+- Desenvolvimento de API REST com Flask
+- Introdução ao Vue.js e componentes reativos
+- Integração entre Python e frontend moderno
 
-- Visualização dos 10 maiores sinistros por operadora em 2024
-- Visualização dos maiores sinistros por operadora no último trimestre
-- Cálculo automático dos totais
-- Interface responsiva e moderna
+## Próximos Passos
+1. Implementar testes unitários com pytest
+2. Adicionar mais visualizações de dados
+3. Melhorar a documentação da API
+4. Explorar mais recursos do Vue.js
+
+## Autor
+Romulo Lima - Desenvolvedor Python com interesse em frontend moderno
